@@ -4,6 +4,7 @@ namespace Loteria
     {
         int sorteos;
 
+
         public Form1()
         {
             InitializeComponent();
@@ -26,6 +27,7 @@ namespace Loteria
             string[] premios = convertirArregloPremios();
             int ganador;
             int premio;
+            int jugadores;
 
             if (validarParticipantes(participantes) == true)
             {
@@ -37,8 +39,11 @@ namespace Loteria
                     ganador = random.Next(0, participantes.Length);
                     lblGanador.Text = participantes[ganador];
 
+                    jugadores = participantes.Length;
+
                     sorteos++;
                     lblSorteos.Text = sorteos.ToString();
+                    lblJugadores.Text = jugadores.ToString();
 
                 }
 
@@ -75,15 +80,36 @@ namespace Loteria
         {
             bool validado = true;
 
-            if (tempo.Length >= 1) {
-                return validado;
-            } else {
+            if (tempo[0] == "")
+            {
                 validado = false;
                 MessageBox.Show("Premios Insuficientes para el sorteo");
-                
+
                 return validado;
             }
-            
+
+            if (tempo[0] == " ")
+            {
+                validado = false;
+                MessageBox.Show("Premios Insuficientes para el sorteo");
+
+                return validado;
+            }
+
+            if (tempo.Length >= 1)
+            {
+                return validado;
+            }
+            else
+            {
+                validado = false;
+                MessageBox.Show("Premios Insuficientes para el sorteo");
+
+                return validado;
+            }
+
+
+
         }
 
         private void btnSorteo_Click(object sender, EventArgs e)
